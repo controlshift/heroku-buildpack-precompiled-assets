@@ -1,7 +1,17 @@
 #!/usr/bin/env bash
 # bin/compile <build-dir> <cache-dir>
 
-set -e
+# fail fast
+# set -e
+
+# debug
+set -x
+
+# parse and derive params
+BUILD_DIR=$1
+CACHE_DIR=$2
+LP_DIR=`cd $(dirname $0); cd ..; pwd`
+BUILDPACK_DIR="$(dirname $(dirname $0))"
 
 export_env_dir() {
   env_dir=$3
@@ -23,6 +33,13 @@ download_assets() {
   curl -O --progress-bar https://${bucket}.s3.amazonaws.com/${file}
 }
 
+function indent() {
+  c='s/^/       /'
+  case $(uname) in
+    Darwin) sed -l "$c";;
+    *)      sed -u "$c";;
+  esac
+}
 
 export_env_dir
 download_assets
@@ -30,5 +47,3 @@ download_assets
 # extract the assets
 echo $PWD
 tar -zxvf agra-${COMMIT_HASH}.tar.gz -C public/assets
-
-
