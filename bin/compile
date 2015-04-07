@@ -46,4 +46,4 @@ download_assets
 
 # extract the assets
 ls -lah $PWD
-tar -zxvf ${PWD}/agra-${SOURCE_VERSION}.tar.gz -C ${$BUILD_DIR}public/assets
+tar -zxvf ${PWD}/agra-${SOURCE_VERSION}.tar.gz -C ${BUILD_DIR}public/assets
