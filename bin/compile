@@ -16,20 +16,19 @@ BUILDPACK_DIR="$(dirname $(dirname $0))"
 
 
 export_env_dir() {
-  ls -lah ${ENV_DIR}
   whitelist_regex=${2:-'^(COMMIT_HASH)$'}
   blacklist_regex=${3:-'^(PATH|GIT_DIR|CPATH|CPPATH|LD_PRELOAD|LIBRARY_PATH)$'}
-  if [ -d "$env_dir" ]; then
-    for e in $(ls $env_dir); do
+  if [ -d "$ENV_DIR" ]; then
+    for e in $(ls $ENV_DIR); do
       echo "$e" | grep -E "$whitelist_regex" | grep -qvE "$blacklist_regex" &&
-      export "$e=$(cat $env_dir/$e)"
+      export "$e=$(cat $ENV_DIR/$e)"
       :
     done
   fi
 }
 
 download_assets() {
-  file=agra-${COMMIT_HASH}.tar.gz
+  file=agra-${SOURCE_VERSION}.tar.gz
   bucket="agra-precompiled-assets"
   resource="/${bucket}/${file}" 
   curl -O --progress-bar https://${bucket}.s3.amazonaws.com/${file}
@@ -48,4 +47,4 @@ download_assets
 
 # extract the assets
 echo $PWD
-tar -zxvf agra-${COMMIT_HASH}.tar.gz -C public/assets
+tar -zxvf agra-${SOURCE_VERSION}.tar.gz -C public/assets
