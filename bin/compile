@@ -2,10 +2,10 @@
 # bin/compile <build-dir> <cache-dir>
 
 # fail fast
-# set -e
+set -e
 
 # debug
-set -x
+# set -x
 
 # parse and derive params
 BUILD_DIR=$1
@@ -47,7 +47,7 @@ download_assets
 # extract the assets
 assets_dir=${BUILD_DIR}/public/assets
 mkdir -p ${assets_dir}
-tar -zxvf ${PWD}/agra-${SOURCE_VERSION}.tar.gz -C ${assets_dir}
+tar -zxf ${PWD}/agra-${SOURCE_VERSION}.tar.gz -C ${assets_dir}
 
 # disable normal precompilation
 touch ${assets_dir}/manifest.yml
