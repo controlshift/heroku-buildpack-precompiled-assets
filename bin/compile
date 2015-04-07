@@ -49,3 +49,6 @@ ls -lah $PWD
 assets_dir=${BUILD_DIR}/public/assets
 mkdir -p ${assets_dir}
 tar -zxvf ${PWD}/agra-${SOURCE_VERSION}.tar.gz -C ${assets_dir}
+
+# disable normal precompilation
+touch ${assets_dir}/manifest.yml
