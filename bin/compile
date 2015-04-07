@@ -13,7 +13,7 @@ CACHE_DIR=$2
 ENV_DIR=$3
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILDPACK_DIR="$(dirname $(dirname $0))"
-echo ls -lah $BUILD_DIR
+ls -lah $BUILD_DIR
 
 export_env_dir() {
   whitelist_regex=${2:-'^(COMMIT_HASH)$'}
