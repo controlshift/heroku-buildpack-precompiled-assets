@@ -12,6 +12,7 @@ BUILD_DIR=$1
 CACHE_DIR=$2
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILDPACK_DIR="$(dirname $(dirname $0))"
+echo $ENV_DIR
 
 export_env_dir() {
   env_dir=$3
