@@ -13,7 +13,6 @@ CACHE_DIR=$2
 ENV_DIR=$3
 LP_DIR=`cd $(dirname $0); cd ..; pwd`
 BUILDPACK_DIR="$(dirname $(dirname $0))"
-ls -lah $BUILD_DIR
 
 export_env_dir() {
   whitelist_regex=${2:-'^(COMMIT_HASH)$'}
@@ -46,5 +45,5 @@ export_env_dir
 download_assets
 
 # extract the assets
-echo $PWD
-tar -zxvf agra-${SOURCE_VERSION}.tar.gz -C public/assets
+ls -lah $PWD
+tar -zxvf ${PWD}/agra-${SOURCE_VERSION}.tar.gz -C ${$BUILD_DIR}public/assets
