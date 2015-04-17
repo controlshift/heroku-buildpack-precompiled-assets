@@ -51,3 +51,5 @@ tar -zxf ${PWD}/agra-${SOURCE_VERSION}.tar.gz -C ${assets_dir}
 
 # disable normal precompilation
 touch ${assets_dir}/manifest.yml
+
+rake assets:sync
