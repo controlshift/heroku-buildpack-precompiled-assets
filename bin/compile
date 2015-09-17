@@ -29,8 +29,16 @@ export_env_dir() {
 download_assets() {
   file=agra-${SOURCE_VERSION}.tar.gz
   bucket="agra-precompiled-assets"
-  resource="/${bucket}/${file}" 
-  curl -O --progress-bar https://${bucket}.s3.amazonaws.com/${file}
+  resource="/${bucket}/${file}"
+
+  response_status_code=`curl -I https://${bucket}.s3.amazonaws.com/${file} 2>/dev/null | head -n 1 | cut -d$' ' -f2`
+  if [ "$response_status_code" = '200' ]
+  then
+    curl -O --progress-bar https://${bucket}.s3.amazonaws.com/${file}
+  else
+    echo "Could not find precompile assets file at https://${bucket}.s3.amazonaws.com/${file}"
+    exit 1
+  fi
 }
 
 function indent() {
